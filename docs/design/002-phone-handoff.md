@@ -1,5 +1,7 @@
 # 002 - Phone capability and handoff
 
+Status: accepted (PR #4).
+
 Issue: #3. Docs-only extension of design 001.
 
 Describe the user-facing capability difference: Tab can place calls; this

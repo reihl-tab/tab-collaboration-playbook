@@ -1,9 +1,10 @@
-# Phone calls: Tab dials, Instinct coordinates
+# Phone calls: the assistant dials, the maintainer coordinates
 
-This Instinct cannot place phone calls. Tab has a phone-calling capability.
-That is why a call task can be delegated to Tab while Instinct remains responsible
-for the request, approval boundaries and result reporting. A voice message is
-not a phone call. Do not tell a recipient that Instinct itself dialled.
+The maintainer (e.g. Instinct) cannot place phone calls. The assistant (Tab) has a
+phone-calling capability. That is why a call task can be delegated to the assistant
+while the maintainer remains responsible for the request, approval boundaries and
+result reporting. A voice message is not a phone call. Do not tell a recipient
+that the maintainer itself dialled.
 
 Checked for documentation on 2026-11-04. Public basis: https://tab.bot/ describes
 making calls and waiting on hold; https://tab.bot/updates includes call-related
@@ -77,7 +78,7 @@ separate authority and checking the applicable rules.
    - 7a. After each attempt, Tab sends a signed report to the maintainer before
      any next attempt; reports are not batched. If an attempt connects, the
      remaining attempts are cancelled unless the GO says otherwise.
-8. Instinct checks the report against the order and reports the result and any
+8. The maintainer checks the report against the order and reports the result and any
    uncertainty to the owner. Do not claim the recipient heard every line just
    because a script was sent. Exhausted attempts or a passed deadline end the
    order; further calls need authorization. Close any unnecessary follow-ups.

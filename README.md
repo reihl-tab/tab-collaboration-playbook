@@ -1,7 +1,12 @@
 # Tab collaboration playbook | מדריך עבודה עם Tab
 
-Documentation only. A public-facing collaboration protocol for an owner,
-Instinct and Tab, not a description of either product's implementation.
+Documentation only. A public-facing collaboration protocol for an owner, a
+maintainer and an assistant, not a description of either product's
+implementation.
+
+Roles: **owner** (the person whose authority applies), **maintainer** (the
+coordinating agent, e.g. Instinct), **assistant** (Tab), **recipient** (a third
+party on a call).
 
 - [English: end-to-end setup](docs/en/setup.md)
 - [עברית: הקמה מקצה לקצה](docs/he/setup.md)
@@ -27,6 +32,9 @@ marked as such; do not report completion without the listed checks.
 המדריך מתאר תהליך עבודה גלוי בלבד. אין כאן פרטי חשבונות, התכתבויות,
 תעודות, מפתחות או הוראות הפעלה פנימיות. הסוכן מוביל את ההקמה;
 הבעלים נדרש בדרך כלל לכל היותר לפתיחת Tab. חסם אמיתי מדווח ולא נעקף.
+
+תפקידים: **בעלים** (האדם שסמכותו חלה), **מתחזק** (הסוכן המתאם, למשל
+Instinct), **עוזר** (Tab), **נמען** (צד שלישי בשיחה).
 
 ## Start
 

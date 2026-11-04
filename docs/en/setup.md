@@ -50,9 +50,10 @@ bypass. Waitlisted access cannot proceed to a verified email channel.
 
 ## 2. Establish the two mailboxes (capability gate)
 
-1. Use the Instinct account's supported email capability and the owner's agreed
-   sending identity. Provision a dedicated mailbox only through an authorized
-   provider flow; this guide supplies no proprietary provisioning commands.
+1. Use the maintainer account's (e.g. Instinct's) supported email capability
+   and the owner's agreed sending identity. Provision a dedicated mailbox only
+   through an authorized provider flow; this guide supplies no proprietary
+   provisioning commands.
 2. Ask Tab in its owner-confirmed conversation whether this account can send and
    receive email from a stable mailbox, receive a mailbox-validation link and
    sign/verify S/MIME or use a compatible mail client. Ask it to report capability
@@ -189,8 +190,10 @@ never fall back silently to unsigned mail.
    green CI, then a squash merge pinned to the reviewed SHA by the designated
    maintainer. Keep deployment, money, live data changes, calls and new outbound
    wording outside this test.
-4. Agree timezone and cadence. A daily sync is a **proposal**, not an enabled
-   schedule. Do not create reminders or recurring messages without authority.
+4. Agree the timezone, the [daily sync](workflow.md#daily-sync) times and the
+   owner's [contact options](workflow.md#owner-contact-options); record them in
+   the private checklist. Do not create reminders or recurring messages beyond
+   what was agreed.
 5. Close the private checklist only when the account, mailbox bindings,
    certificates, two-way verification and first task are verified. Otherwise
    report the completed stages and the precise remaining blocker.

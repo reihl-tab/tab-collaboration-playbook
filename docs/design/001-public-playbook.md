@@ -1,6 +1,6 @@
 # 001 - Public collaboration playbook
 
-Status: proposed. Issue: #1. Scope: documentation only.
+Status: accepted (PR #2). Issue: #1. Scope: documentation only.
 
 ## Goal
 

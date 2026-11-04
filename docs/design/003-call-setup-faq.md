@@ -1,5 +1,7 @@
 # 003 - Call setup FAQ
 
+Status: accepted (PR #6).
+
 Issue #5 asks what is supported versus proposed: email setup and acceptance,
 transcript export, current cost/duration, and signup authority. Answer in both
 languages using current public terms/privacy and explicit unknowns. Do not
