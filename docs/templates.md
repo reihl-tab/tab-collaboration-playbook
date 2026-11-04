@@ -58,7 +58,10 @@ Tasking messages are signed and numbered from one shared `td` sequence; see
 
 > MAINTAINER report id: tdNNN. Answers: MESSAGE_OR_TD_ID_OR_NONE.
 > GO עבור ISSUE_REFERENCE. אחראי: ROLE. תוצר: OUTCOME.
-> תחום: REPOSITORY בלבד. אין סודות, נתונים אישיים או פעולה כלפי חוץ.
+> תחום: REPOSITORY ו-ISSUE_REFERENCE בלבד.
+> מותר: מחקר במקורות ציבוריים, fork, ענף, PR ובדיקות סינתטיות.
+> מוחרג: סודות, מידע אישי, כתיבה ישירה ל-main, הגדרות, שירותים חיים, כסף,
+> הודעות חיצוניות או שיחות.
 > קבלה: מסמך תכנון קודם אם ה-issue דורש שער תכנון, סקירה עצמאית על SHA
 > מדויק ו-CI ירוק. עבודה חדשה מחוץ לתחום דורשת GO חדש.
 > נא להשיב בדיווח שמתחיל ב-`Tab report id: tdNNN` ו-`Answers: tdNNN`:
@@ -90,12 +93,15 @@ Tasking messages are signed and numbered from one shared `td` sequence; see
 ## תבנית שיחה (פרטי בלבד)
 
 > מזהה: UNIQUE_REFERENCE. אישור בעלים: PRIVATE_APPROVAL_REFERENCE.
-> מתקשר: Tab, מזדהה ביושר כעוזר AI. נמען ומספר מלא: PRIVATE_RECIPIENT.
+> מתקשר: Tab, מזדהה ביושר כעוזר ה-AI של הבעלים.
+> נמען ומספר מלא: PRIVATE_RECIPIENT.
 > מטרה ושפה: APPROVED_SCOPE. פתיח, שאלות וסיום מדויקים: APPROVED_TEXT.
 > מידע ותגובות מותרים: EXPLICIT_SCOPE_OR_NONE. עלות עדכנית שנבדקה ותקרה: LIMIT.
 > חלון חיוג, תאריך ואזור זמן: WINDOW. ניסיונות ומרווח: ATTEMPTS_AND_INTERVAL.
 > תא קולי, תפריט, מקשים והתחלה אחרי שקט: EXPLICIT_RULE_OR_STOP.
 > הקלטה כבויה אלא אם אושרה בנפרד ומותרת. אין ניסיון כפול או חלופה לא מאושרת.
+> עוצרים בביטול, נמען שגוי, סירוב, תפריט לא ברור, כשל שמיעה, שאלה לא צפויה
+> או מיצוי המגבלות. אין העברה, הודעה, גילוי מידע או התחייבות שלא אושרו.
 > לפני חיוג בודקים ביטול ושינויים מורשים. מאשרים קבלה לפני ביצוע ומדווחים
 > אחרי כל ניסיון זמן, חיבור, משך ידוע, מה נמסר, תשובות, חסמים וחריגות.
 > קבלה אינה השלמה; ההוראות אינן הבטחת אכיפה טכנית של דיבור או מקשים.
