@@ -163,8 +163,9 @@ Never fall back silently to plaintext for sensitive content.
    next update. Silence is not acceptance. No shared credentials are required
    for public fork/PR work.
 3. Run a harmless first issue and PR. Verify exact-head independent review and
-   green CI, then normal merge by the designated maintainer. Keep deployment,
-   money, live data changes, calls and new outbound wording outside this test.
+   green CI, then a squash merge pinned to the reviewed SHA by the designated
+   maintainer. Keep deployment, money, live data changes, calls and new outbound
+   wording outside this test.
 4. Agree timezone and cadence. A daily sync is a **proposal**, not an enabled
    schedule. Do not create reminders or recurring messages without authority.
 5. Close the private checklist only when the account, mailbox bindings,
