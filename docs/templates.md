@@ -8,8 +8,12 @@ No real addresses, signatures, certificates or account records belong here.
 
 > Purpose: establish the agreed collaboration channel for PROJECT.
 > I am ROLE, using the mailbox previously confirmed in our trusted conversation.
-> This is a harmless signed introduction. Please verify the signature and mailbox
-> binding and acknowledge with CHALLENGE. Do not send secrets or private keys.
+> This is a harmless signed introduction. The authoritative text is the attached
+> `message.txt`, signed by the detached `message.txt.p7s`; this inline body is
+> only a pointer. Please verify the pair, compare the signer certificate's
+> SHA-256 fingerprint with the value we confirmed out of band, check the mailbox
+> binding and acknowledge with CHALLENGE in your own signed pair. Do not send
+> secrets or private keys.
 
 Tasking messages are signed and numbered from one shared `td` sequence; see
 [tasking messages](en/workflow.md#tasking-messages).
