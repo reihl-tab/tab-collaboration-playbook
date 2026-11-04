@@ -80,3 +80,27 @@ These are general engineering lessons, not an account incident log.
 - Classify a provider/billing hold separately from code failures.
 - Scan the staged inventory and history, not just files already committed.
 - Preserve a blocker rather than bypassing privacy, payment or approval gates.
+
+## Known pitfalls
+
+Practical traps that each cost real time once. They are general; no account
+details belong here.
+
+- **Non-interactive push.** A sandbox without a credential helper cannot answer
+  a password prompt. Configure a credential for non-interactive use before the
+  one push. Never paste tokens into docs, issues, commits or logs.
+- **Fork tokens and workflow files.** A fork token without workflow permission
+  cannot push a branch whose history adds or updates `.github/workflows` files.
+  Sync the fork's main with upstream first, then branch.
+- **Shared virtual environments.** An editable install in a virtual environment
+  shared between worktrees points at whichever worktree installed last, and
+  version checks then fail for no visible reason. Reinstall from the worktree
+  under test, or use one environment per worktree.
+- **Stale bytecode.** A leftover `__pycache__` can make a mutant look killed or
+  survived. Clear it before each run, or set `PYTHONDONTWRITEBYTECODE=1`.
+- **Measure on current main.** Re-measure on a clean worktree of the current
+  main, not on an old local checkout.
+- **Server-side push rejection.** During a hosting-service incident a push can
+  be rejected with nothing landing. Confirm with `git ls-remote` before
+  retrying, and wait for the service to recover. A rejected push does not count
+  as "the one push".
