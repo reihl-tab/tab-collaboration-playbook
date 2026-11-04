@@ -74,7 +74,8 @@ Tasking messages are signed and numbered from one shared `td` sequence; see
 ## Call request (private use only, owner approval required)
 
 > Order ID: UNIQUE_REFERENCE. Owner approval: PRIVATE_APPROVAL_REFERENCE.
-> Caller: Tab, identified honestly as the owner's AI assistant.
+> Caller: Tab, identified honestly as the owner's digital (AI) assistant; never
+> claims to be the owner or the maintainer.
 > Recipient and full number: PRIVATE_VERIFIED_RECIPIENT_AND_NUMBER.
 > Purpose: APPROVED_PURPOSE. Language: LANGUAGE.
 > Exact approved opening: APPROVED_TEXT.
@@ -82,14 +83,23 @@ Tasking messages are signed and numbered from one shared `td` sequence; see
 > Permitted disclosures and response branches: EXPLICIT_SCOPE_OR_NONE.
 > Cost/plan terms checked: VERIFIED_CURRENT_TERMS. Approved maximum: LIMIT.
 > Dial window: START_TO_END, DATE_AND_IANA_TIMEZONE.
-> Attempts: MAXIMUM. Retry interval: INTERVAL. No duplicate live attempts.
-> Voicemail/menu handling and DTMF: EXPLICIT_APPROVED_RULE_OR_STOP.
-> Silence-start trigger: APPROVED_TRIGGER_OR_WAIT_FOR_HUMAN.
+> Attempts: EXACT_NUMBER. Retry interval: INTERVAL. No duplicate live attempts.
+> If an attempt connects, remaining attempts are cancelled unless stated here.
+> Maximum connected duration: LIMIT (default 10 minutes). Ring time: LIMIT
+> (default about 60 seconds). Wording is delivered verbatim.
+> Voicemail message, SMS/messaging fallback and keypad digits: NONE unless
+> approved here as an exact rule (menu handling: EXPLICIT_APPROVED_RULE_OR_STOP).
+> Silence-start trigger: APPROVED_TRIGGER_OR_WAIT_FOR_HUMAN. The voice yields if
+> talked over; keep the scripted turn short.
+> Ending: only on an explicit goodbye, the callee hanging up, or about 8 seconds
+> of silence; "thanks" alone is not a goodbye.
 > Recording: OFF unless separately authorized and lawful.
 > Stop on cancellation, wrong recipient, refusal, unclear menu, hearing failure,
 > unexpected question or exhausted limits. No unapproved transfer, fallback,
-> message, disclosure or commitment. Recheck authorized changes before dialing.
-> Acknowledge scope before acting. Report after each attempt: actual timestamp,
+> message, disclosure or commitment. Re-read the inbox for cancellation or
+> authorized changes immediately before each dial, including scheduled retries.
+> Acknowledge scope before acting. Send a signed report after each attempt,
+> before any next attempt (not batched): actual timestamp,
 > connected/not connected, known duration, delivered words, answers, unresolved
 > items, deviations and evidence limits. Do not call acknowledgment completion.
 > These are instructions, not technical guarantees of speech or keypad behavior.
@@ -97,15 +107,26 @@ Tasking messages are signed and numbered from one shared `td` sequence; see
 ## תבנית שיחה (פרטי בלבד)
 
 > מזהה: UNIQUE_REFERENCE. אישור בעלים: PRIVATE_APPROVAL_REFERENCE.
-> מתקשר: Tab, מזדהה ביושר כעוזר ה-AI של הבעלים.
+> מתקשר: Tab, מזדהה ביושר כעוזר הדיגיטלי (AI) של הבעלים; לעולם אינו מציג
+> את עצמו כבעלים או כמתחזק.
 > נמען ומספר מלא: PRIVATE_RECIPIENT.
 > מטרה ושפה: APPROVED_SCOPE. פתיח, שאלות וסיום מדויקים: APPROVED_TEXT.
 > מידע ותגובות מותרים: EXPLICIT_SCOPE_OR_NONE. עלות עדכנית שנבדקה ותקרה: LIMIT.
-> חלון חיוג, תאריך ואזור זמן: WINDOW. ניסיונות ומרווח: ATTEMPTS_AND_INTERVAL.
-> תא קולי, תפריט, מקשים והתחלה אחרי שקט: EXPLICIT_RULE_OR_STOP.
-> הקלטה כבויה אלא אם אושרה בנפרד ומותרת. אין ניסיון כפול או חלופה לא מאושרת.
+> חלון חיוג, תאריך ואזור זמן: WINDOW. מספר ניסיונות מדויק ומרווח:
+> ATTEMPTS_AND_INTERVAL. אם ניסיון התחבר, הנותרים מבוטלים אלא אם צוין כאן.
+> משך מרבי לשיחה שהתחברה: LIMIT (ברירת מחדל 10 דקות). זמן צלצול: LIMIT
+> (ברירת מחדל כ-60 שניות). הנוסח נמסר מילה במילה.
+> הודעה בתא קולי, SMS או חלופת הודעות ומקשים: אין, אלא אם אושר כאן ככלל
+> מדויק (תפריט: EXPLICIT_RULE_OR_STOP). התחלה אחרי שקט:
+> APPROVED_TRIGGER_OR_WAIT_FOR_HUMAN.
+> הקול נסוג כשמדברים מעליו; שומרים על החלק המוכתב קצר.
+> סיום: רק בפרידה מפורשת, כשהנמען מנתק, או אחרי כ-8 שניות שקט; "תודה"
+> לבדה אינה פרידה.
+> הקלטה כבויה אלא אם אושרה בנפרד ומותרת. אין ניסיון כפול בזמן שניסיון פעיל.
 > עוצרים בביטול, נמען שגוי, סירוב, תפריט לא ברור, כשל שמיעה, שאלה לא צפויה
-> או מיצוי המגבלות. אין העברה, הודעה, גילוי מידע או התחייבות שלא אושרו.
-> לפני חיוג בודקים ביטול ושינויים מורשים. מאשרים קבלה לפני ביצוע ומדווחים
-> אחרי כל ניסיון זמן, חיבור, משך ידוע, מה נמסר, תשובות, חסמים וחריגות.
+> או מיצוי המגבלות. אין העברה, חלופה, הודעה, גילוי מידע או התחייבות שלא
+> אושרו. מיד לפני כל חיוג, כולל ניסיונות חוזרים מתוזמנים, קוראים שוב את תיבת
+> הדואר ובודקים ביטול ושינויים מורשים. מאשרים קבלה לפני ביצוע, ושולחים דיווח
+> חתום אחרי כל ניסיון, לפני ניסיון נוסף (לא בדיווח מרוכז): זמן, חיבור, משך ידוע,
+> מה נמסר, תשובות, חסמים וחריגות.
 > קבלה אינה השלמה; ההוראות אינן הבטחת אכיפה טכנית של דיבור או מקשים.

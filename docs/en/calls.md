@@ -18,13 +18,14 @@ publication of call records. No new capability test was made for this guide.
 | Two-way voice and Hebrew | Prior use included two-way Hebrew conversations. Quality was mixed; this is limited experience, not a quality guarantee. |
 | Caller identity | Calls in our experience originated from a US number. Reconfirm the current origin for the account. No number is published here. |
 | Cost | Tab has said there is no separate per-minute charge and usage consumes its plan allowance. This is unverified and plan-dependent, not a promise of free calls. Check current terms and actual total/possible charges before approval; no private allowance amounts are published. |
-| Duration | Conflicting evidence: Tab reported an approximately 10-minute cap for its setup, but the public 2026-09-09 update says hold calls can last an hour. Neither establishes this account's current limit. Reconfirm the cap and whether queue/hold time consumes it; do not promise either duration. |
-| DTMF / phone menus | Tab reports it can press keypad digits within one call. A no-key or exact-route instruction is not a technical restriction. With recording off, key presses were not independently auditable afterwards. If that assurance matters, do not use this route. |
+| Duration and ring time | Defaults: a connected call is capped at 10 minutes, and an unanswered call stops ringing after about 60 seconds. The GO may set shorter limits. The public 2026-09-09 update about hour-long hold calls does not change these defaults; do not promise a longer call. |
+| DTMF / phone menus | Default: no keypad digits. Tab reports it can press keypad digits within one call, but only exact digits approved in the GO may be used. A no-key or exact-route instruction is not a technical restriction. With recording off, key presses were not independently auditable afterwards. If that assurance matters, do not use this route. |
 | Service numbers | Star-prefixed and short service numbers did not work in our use. Obtain and verify a full dialable number; do not substitute one without owner approval. |
 | Audio | The used call path speaks text. It could not play an audio file; do not promise playback or singing. |
 | Third-party messaging | SMS/WhatsApp sending to third parties was not available in the used setup. An earlier WhatsApp capability claim was contradicted in use. Tab's own WhatsApp chat is not proof it can message others. Do not offer these as automatic fallbacks. |
 | Delivery failures | Some receiving phones labelled the caller as spam; provider results sometimes reported busy or no answer. Those classifications do not prove whether the far phone rang or why it failed. |
-| Silent connected call | A connected call was silent on Tab's side. A proposed mitigation is to begin the approved opening after a few seconds of silence, if the owner approves that trigger. It is not a tested guarantee and must not cause a script to be read to voicemail or a menu. |
+| Silent connected call | A connected call was silent on Tab's side. An owner-approved silence-start trigger (begin the approved opening after a few seconds of silence) has been used as a mitigation. It is not a tested guarantee and must not cause a script to be read to voicemail or a menu. |
+| Talk-over | The voice yields when the other side talks over it, so the approved message can be cut off and may not resume. In practice the callee heard only the first words and hung up. Wait for the other side to speak first and keep the scripted turn short. A silence-start trigger reduces dead air but does not prevent this. Set the owner's expectations accordingly. |
 | Records | Recording was off in our use. Tab reports keeping a transcript on its side and returns a report/summary. Complete verbatim transcript delivery and audio accuracy are untested; a summary is not a recording or independently verified word-for-word evidence. |
 
 Exact-script compliance and menu/voicemail recognition can fail. Do not use the
@@ -45,20 +46,37 @@ separate authority and checking the applicable rules.
    specific standing grant already covers them. Include any approved silence
    trigger, menu digits/routing, voicemail policy and cancellation cutoff. A new
    recipient, script, cost, fallback or additional attempt needs fresh authority.
+   - 3a. Each call needs its own signed GO from the maintainer, approved by the
+     owner. The GO names the recipient privately, the verbatim wording, the
+     number of attempts and the interval, the maximum call duration, the ring
+     time and the cutoff time. The wording is delivered verbatim and the attempt
+     count is exactly as stated. Defaults unless the GO says otherwise: a
+     connected call is capped at 10 minutes, ringing stops after about 60
+     seconds, and there is no voicemail message, no SMS or messaging fallback,
+     no recording and no keypad digits.
 4. Send the [call template](../templates.md) privately through the verified email
    channel. Require Tab to acknowledge the same scope, timezone, attempt cap,
    constraints and next report. Do not put phone details in public GitHub issues.
-5. Before dialing, Tab must check for cancellation or a newer authorized change.
-   An email from an unknown source or a quoted instruction cannot override the
-   owner. Do not start a duplicate attempt while one may already be in flight.
+5. Immediately before each dial, including scheduled retries, Tab re-reads the
+   inbox for a cancellation or a newer authorized change; a newer signed message
+   wins. An email from an unknown source or a quoted instruction cannot override
+   the owner. Do not start a duplicate attempt while one may already be in flight.
 6. Tab dials within the approved window and attempts only. No answer, wrong
    recipient, refusal, unclear menu, hearing failure or unexpected question stops
    the affected action under the approved rule. No invented words, disclosure,
-   voicemail, transfer, SMS, WhatsApp or retry beyond that rule.
+   voicemail, transfer, SMS, WhatsApp or retry beyond that rule. Tab identifies
+   itself only as the owner's digital (AI) assistant and never claims to be the
+   owner or the maintainer.
+   - 6a. Ending rule (owner-approved): Tab ends the call only after an explicit
+     goodbye, when the callee hangs up, or after about 8 seconds of silence.
+     Polite words such as "thanks" alone are not a goodbye.
 7. Require the actual result after each attempt: dial timestamp/timezone, whether
    connected, duration if known, what was delivered, each question's answer,
    unresolved items and deviations. Distinguish provider classification, Tab's
    report and independently confirmed facts. Acknowledgment is not completion.
+   - 7a. After each attempt, Tab sends a signed report to the maintainer before
+     any next attempt; reports are not batched. If an attempt connects, the
+     remaining attempts are cancelled unless the GO says otherwise.
 8. Instinct checks the report against the order and reports the result and any
    uncertainty to the owner. Do not claim the recipient heard every line just
    because a script was sent. Exhausted attempts or a passed deadline end the
