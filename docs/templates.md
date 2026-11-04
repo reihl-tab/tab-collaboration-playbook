@@ -11,37 +11,58 @@ No real addresses, signatures, certificates or account records belong here.
 > This is a harmless signed introduction. Please verify the signature and mailbox
 > binding and acknowledge with CHALLENGE. Do not send secrets or private keys.
 
-## Task
+Tasking messages are signed and numbered from one shared `td` sequence; see
+[tasking messages](en/workflow.md#tasking-messages).
 
-> Task ID: ISSUE_REFERENCE
-> Accountable owner: ROLE
+## GO (task)
+
+> MAINTAINER report id: tdNNN
+> Answers: MESSAGE_OR_TD_ID_OR_NONE
+> GO for ISSUE_REFERENCE. Accountable owner: ROLE
 > Outcome: one bounded documentation change.
 > Scope: REPOSITORY and ISSUE_REFERENCE only.
 > Allowed: research public sources, fork, branch, PR and synthetic tests.
 > Excluded: secrets, personal data, direct main writes, settings, live services,
 > money, external messages or calls.
-> Acceptance: linked design, exact-head independent review and green CI.
+> Acceptance: design note first if the issue needs the design gate, exact-head
+> independent review and green CI. New work outside this scope needs a new GO.
 > Please reply accepted/blocked with output, dependencies and next checkpoint.
 
 ## Acknowledgment
 
-> Accepted TASK_ID for OUTCOME within SCOPE. Next artifact: ARTIFACT.
+> Tab report id: tdNNN
+> Answers: MESSAGE_OR_TD_ID
+> Scope: ISSUE_REFERENCE (per GO tdNNN)
+> Accepted OUTCOME within SCOPE. Next artifact: ARTIFACT.
 > Blockers: NONE_OR_SPECIFIC_GAP. Next update: AGREED_TIME_AND_TIMEZONE.
 > I will stop rather than widen scope if an excluded effect becomes necessary.
 
 ## Completion / blocker
 
-> Task: TASK_ID. Status: VERIFIED_OR_BLOCKED.
+> Tab report id: tdNNN
+> Answers: MESSAGE_OR_TD_ID
+> Scope: ISSUE_REFERENCE (per GO tdNNN)
+> Status: VERIFIED_OR_BLOCKED.
 > Evidence: ACTUAL_ISSUE_OR_PR_LINK and REVIEWED_SHA.
 > Checks: ACTUALLY_RUN_CHECKS. Not verified: REMAINING_GAPS.
 > Next owner/action: ROLE_AND_ONE_SPECIFIC_STEP.
 
+## DONE
+
+> MAINTAINER report id: tdNNN
+> Answers: TD_ID_OF_THE_COMPLETION_REPORT
+> DONE for ISSUE_REFERENCE (per GO tdNNN). Merged MERGE_COMMIT after
+> independent review of REVIEWED_SHA. This closes the scope.
+
 ## תבנית קצרה בעברית
 
-> משימה: ISSUE_REFERENCE. אחראי: ROLE. תוצר: OUTCOME.
+> MAINTAINER report id: tdNNN. Answers: MESSAGE_OR_TD_ID_OR_NONE.
+> GO עבור ISSUE_REFERENCE. אחראי: ROLE. תוצר: OUTCOME.
 > תחום: REPOSITORY בלבד. אין סודות, נתונים אישיים או פעולה כלפי חוץ.
-> קבלה: מסמך תכנון, סקירה עצמאית על SHA מדויק ו-CI ירוק.
-> נא להשיב התקבל או חסום, עם תוצר צפוי, תלות ומועד עדכון.
+> קבלה: מסמך תכנון קודם אם ה-issue דורש שער תכנון, סקירה עצמאית על SHA
+> מדויק ו-CI ירוק. עבודה חדשה מחוץ לתחום דורשת GO חדש.
+> נא להשיב בדיווח שמתחיל ב-`Tab report id: tdNNN` ו-`Answers: tdNNN`:
+> התקבל או חסום, עם תוצר צפוי, תלות ומועד עדכון.
 
 ## Call request (private use only, owner approval required)
 
