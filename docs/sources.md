@@ -12,6 +12,7 @@ recommendation. This guide does not reproduce private account records.
 | https://guide.actalis.com/faq/S-MIME/S-MIME | Single-address certificates, ASCII address restriction, generic client import, validation-link lifecycle, free PKCS#12 delivery. | Client UI and current enrollment may vary. |
 | https://extrassl.actalis.it/portal/uapub/doProcess?lang=en | Free Email Certificate entry and first email validity-check page. | No fresh enrollment beyond public entry was performed. |
 | https://docs.openssl.org/4.0/man1/openssl-smime/ | Command-line verification example; CMS recommendation for newer formats. | Version-specific; command alone does not check actor binding or current revocation. |
+| https://docs.openssl.org/3.0/man1/openssl-cms/ | `cms -verify` of a detached DER signature (`-content`, `-binary`, `-inform DER`), `-noverify`, writing the signer certificate (`-signer`). | Version-specific. The pinned-fingerprint comparison in setup section 4 is this project's recommendation, not an OpenSSL feature; it does not check revocation. |
 
 ## Verification labels
 

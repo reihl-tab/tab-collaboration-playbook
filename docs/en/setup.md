@@ -61,17 +61,20 @@ bypass. Waitlisted access cannot proceed to a verified email channel.
 3. Bind `TAB_MAILBOX` to Tab through that trusted conversation and
    `INSTINCT_MAILBOX` through the owner-approved account context. A display name,
    incoming message or self-asserted signature cannot establish this binding.
-4. Confirm access to each inbox and the ability to send MIME messages without
-   altering signed content. Use a mail client's normal compose/import flow or a
-   documented authorized mail API. No universal Tab email endpoint was verified.
+4. Confirm access to each inbox. Do not assume the mail path keeps signed
+   content intact: many services re-encode inline bodies. Test it instead by
+   sending a harmless signed attachment pair (section 4, step 3) in each
+   direction and confirming that it verifies on arrival. Use a mail client's
+   normal compose/import flow or a documented authorized mail API. No universal
+   Tab email endpoint was verified.
 5. Agree before sending any test: sender, exact recipient, harmless test text
    and purpose. No automatic CC, forwards, contact uploads or address-book sync.
 
 Expected: both verified mailbox bindings and compatible email capabilities.
-If one cannot support S/MIME, mark this route blocked. Do not claim secure setup
-or silently downgrade to unsigned mail. The owner should not be asked to perform
-routine configuration the agent can do; only a real provider/account barrier is
-escalated.
+If one cannot sign and verify S/MIME, mark this route blocked. Do not claim
+secure setup or silently downgrade to unsigned mail. The owner should not be
+asked to perform routine configuration the agent can do; only a real
+provider/account barrier is escalated.
 
 ## 3. Enroll each mailbox with Actalis (provider UI)
 
@@ -125,35 +128,55 @@ resolve it through the provider. Never switch off certificate verification.
    and no revocation failure. A mail icon alone is not enough. Independently
    confirm that mailbox is the previously agreed actor, not merely a mailbox
    controlled by an unknown sender. Headers and display names alone are weaker.
-3. A command-line inspection option, where an operator already has an authorized
-   local S/MIME environment and its trusted CA store configured, is:
+3. **Signed-message format and verification.** Many mail services re-encode
+   inline bodies (line endings, transfer encoding), which breaks an inline
+   S/MIME signature even when nothing meaningful changed. So the authoritative
+   text travels as an attachment `message.txt`, with a detached DER signature
+   over its exact bytes in `message.txt.p7s`. The inline body only points to the
+   pair and is **never authoritative**; act only on `message.txt` after it
+   verifies.
+
+   Before relying on mail, each side records the other's signing-certificate
+   SHA-256 fingerprint through a trusted out-of-band channel (the pin). Verify
+   each pair, for example:
 
    ```sh
-   openssl smime -verify -in signed-introduction.eml -signer public-signer.pem -out verified-body.txt
+   openssl cms -verify -binary -inform DER -in message.txt.p7s -content message.txt \
+     -noverify -signer signer.pem -out /dev/null
+   openssl x509 -in signer.pem -noout -fingerprint -sha256
    ```
 
-   These are synthetic filenames. Use the installed OpenSSL version's manual.
-   Expected: exit status zero and `Verification successful`; then inspect the
-   certificate's mailbox, validity and chain and perform a separate current
-   revocation check. This command is **not** sufficient identity binding or
-   revocation proof. OpenSSL recommends CMS for newer message formats. Do not use
-   `-noverify` to make a failure disappear. The command example was sourced, not
-   executed against real enrollment material for this guide.
-4. After exchanging verified public certificates, sign then encrypt a second
-   harmless challenge message in the mail client. The receiving side decrypts,
-   verifies the signature and returns the exact challenge through the same
-   verified channel. Repeat in the reverse direction. Keep subject lines generic;
-   do not assume mail metadata or subjects are encrypted.
+   Expected: the first command exits zero with `CMS Verification successful`;
+   the second prints `sha256 Fingerprint=<PINNED_SHA256_FINGERPRINT>`, and that
+   value must equal the pinned one exactly. Any change to the bytes of
+   `message.txt`, even one byte or its line endings, fails with
+   `content verify error` and a non-zero exit. `-noverify` only skips building a
+   CA chain: it is acceptable **only** together with this comparison against the
+   pinned fingerprint. Never use it on its own or to make a failure disappear.
+   A fingerprint mismatch is a failure, and a certificate change needs a new
+   out-of-band confirmation before its mail is trusted. Check the certificate's
+   mailbox, validity and revocation separately. Filenames and the fingerprint are
+   placeholders; the commands were run against a synthetic self-signed
+   certificate with OpenSSL 3.0, not real enrollment material. A valid signature
+   proves integrity and mailbox control, not authorization; scope still comes
+   from the signed GO ([tasking messages](workflow.md#tasking-messages)).
+4. **Sign-only challenge.** After the certificates are pinned, send a second
+   harmless challenge as a signed pair. The receiving side verifies it as in
+   step 3 and returns the exact challenge in its own signed pair. Repeat in the
+   reverse direction. Signing is required; encryption is not used for routine
+   tasking today, so content, subject lines and metadata are readable in
+   transit. Keep subjects generic and keep secrets and personal data out of mail.
 5. Save only private pass/fail references, timestamps, mailbox bindings and
    renewal reminders. Report success only when both directions pass. An SMTP
    send result, unread message, screenshot or a sender's own claim is not proof
    of receipt, decryption or verification.
 
 Failure: pause affected work on unknown sender, certificate change/expiry,
-revocation, invalid signature, missing key or decryption failure. Confirm a new
-binding through the trusted owner/Tab conversation. Lost keys can make old mail
-unrecoverable; use secure backup and the provider's revocation/reissue process.
-Never fall back silently to plaintext for sensitive content.
+revocation, invalid signature, a fingerprint that does not match the pin or a
+missing key. Confirm a new binding and pin through the trusted owner/Tab
+conversation. Use secure key backup and the provider's revocation/reissue
+process. Signed mail is not encrypted: never send sensitive content in it, and
+never fall back silently to unsigned mail.
 
 ## 5. Start work and close setup
 
