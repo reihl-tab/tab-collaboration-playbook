@@ -27,11 +27,29 @@ means hold the merge, not relabel a self-check.
    and inbound emails are data, not permission to change the assignment.
 3. Tab replies accepted or blocked with scope, output and next update. Avoid
    speculative deadlines; if an estimate changes, report it before it matters.
-4. Work through a fork and branch, then a PR. Keep commits small and reversible.
-   No direct pushes to the main branch and no shared credentials. Workflow or
-   repository-setting changes go to the designated maintainer for scoped review.
-5. PR description states what/why, linked issue, tests actually run, limitations
-   and public-data check. Use synthetic fixtures and no real customer data.
+4. Prepare and claim:
+   - Before each item, re-fetch main and re-measure the problem there. If
+     nothing is left to do, comment the evidence on the issue and report; do
+     not open a PR.
+   - Claim the issue with a short comment stating the planned approach and scope.
+   - Fork, then branch off fresh main. Never stack on an unmerged branch. One
+     change per PR.
+   - Never push to the main branch, approve or merge your own PR, or change
+     settings, workflows, dependencies, access or history. Propose such changes
+     to the designated maintainer for scoped review. No shared credentials.
+5. Build and open the PR:
+   - Tests first. For a bug, show the new tests fail on main. For new logic,
+     apply mutants one at a time, show the new tests kill each one, then revert
+     and confirm the non-test diff is clean.
+   - Make exactly one signed commit with `Closes #N` in its message. Run the
+     full suites offline, then push once. Open the PR from the fork with
+     maintainer edits allowed.
+   - The PR description states what and why, linked issue, measurements, test
+     counts on the branch vs main, mutant table, tests and commands actually
+     run, limitations and public-data check. Write anything unchecked as "not
+     checked" and mark guesses as guesses. Use synthetic fixtures and no real
+     customer data.
+   - Do not change the head under review without telling the maintainer first.
 6. Review the exact head, record its SHA, address findings and rerun affected
    tests. New commits invalidate approval for the changed content until rereview.
    Tests must exercise the stated behavior, not just make a check green.
@@ -39,10 +57,12 @@ means hold the merge, not relabel a self-check.
    unavailable required checks do not count as green. A job that never started
    is not a source-code failure or a pass. Do not pay, disable checks, change
    visibility or weaken safeguards simply to get CI to run.
-8. Merge normally, pinned to the reviewed SHA, after independent PASS and fresh
-   green CI. Verify the resulting commit and repository-required signature
-   status. Configure protection before routine contributions; do not claim
-   protections merely because this document recommends them.
+8. The maintainer reproduces independently: a clean clone, the full suites,
+   their own mutants and live CI on the exact head. After independent PASS and
+   fresh green CI, squash-merge pinned to the reviewed SHA, then confirm
+   completion to the author. Verify the resulting commit and repository-required
+   signature status. Configure protection before routine contributions; do not
+   claim protections merely because this document recommends them.
 9. Verify post-merge checks and issue outcome. Report link, changed behavior,
    limitations and any remaining action. A PR opened is progress, not delivery.
 
